@@ -1,0 +1,84 @@
+#Импортируем нужные нам модели и тексты статей(Сделал для удобства).
+from django.contrib.auth.models import User
+from news.models import *
+from news.text import *
+
+#Создаем двух пользователей.
+user1 = User.objects.create_user('Andrey')
+user2 = User.objects.create_user('Vanya')
+
+#Создаем 2 объекта модели Author.
+author_andrey = Author.objects.create(author=user1)
+author_vanya = Author.objects.create(author=user2)
+
+#Добавляем 4 категории в модель Category.
+cat_sport = Category.objects.create(category='Спорт')
+cat_politic = Category.objects.create(category='Политика')
+cat_cook = Category.objects.create(category='Кулинария')
+cat_travel = Category.objects.create(category='Путешествие')
+
+#Добовляем 2 статьи и 1 новость.
+p_1 = Post.objects.create(p_author=author_andrey, genre='AR', title=t_foot, main_text=foot)
+p_2 = Post.objects.create(p_author=author_vanya, genre='AR', title=t_cook, main_text=cook)
+p_3 = Post.objects.create(p_author=author_andrey, genre='NE', title=t_polit, main_text=polit)
+
+#Присваиваем категории к статьям.
+PostCategory.objects.create(post=p_1, category=cat_sport)
+PostCategory.objects.create(post=p_1, category=cat_politic)
+PostCategory.objects.create(post=p_2, category=cat_cook)
+PostCategory.objects.create(post=p_2, category=cat_travel)
+PostCategory.objects.create(post=p_3, category=cat_politic)
+PostCategory.objects.create(post=p_3, category=cat_travel)
+
+#Создаем комментарии.
+c_1 = Comment.objects.create(post=p_1, user=user1, comment='Футблок, круто! Люблю гонять шары!')
+c_2 = Comment.objects.create(post=p_3, user=user2, comment='Политика отстой, все ради бабок!')
+c_3 = Comment.objects.create(post=p_2, user=user1, comment='Гречку надо варить?:D')
+c_4 = Comment.objects.create(post=p_3, user=user2, comment='Где здесь кнопка дизлайка?')
+
+#Лайкаем дизлайкаем.
+p_1.like()
+p_1.like()
+p_1.like()
+p_1.dislike()
+p_2.like()
+p_2.dislike()
+p_2.dislike()
+p_2.like()
+p_2.like()
+p_3.dislike()
+p_3.dislike()
+p_3.dislike()
+p_3.like()
+c_1.like()
+c_1.like()
+c_2.like()
+c_2.dislike()
+c_3.like()
+c_3.like()
+c_3.like()
+c_3.like()
+c_4.dislike()
+c_4.like()
+c_4.like()
+
+#Обновляем рейтинги пользователей.
+author_andrey.update_rating()
+author_vanya.update_rating()
+
+
+#Выводим никнейм лучшего пользователя по рейтингу.
+Author.objects.order_by('-a_rating').values('author__username').first()
+
+#Выводим информацию об авторе и лучшем посте автора.
+au = Post.objects.order_by('-p_rating').first()
+au.title
+au.p_rating
+au.preview()
+Author.objects.filter(id=au.p_author_id).values('author__date_joined', 'author__username', 'a_rating')
+
+#Выводим все комментарии и данные о них.
+Comment.objects.filter(id=au.id).values('time_in', 'user', 'c_rating', 'comment')
+
+
+
