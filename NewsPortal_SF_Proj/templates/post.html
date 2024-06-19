@@ -1,0 +1,18 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+
+{% block title %}
+Post
+{% endblock title %}
+
+
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <h3>{{ post|description_time_in }}</h3>
+    <hr>
+    <p>
+        {{ post.main_text }}
+    </p>
+{% endblock content %}

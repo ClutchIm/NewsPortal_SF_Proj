@@ -81,4 +81,10 @@ Author.objects.filter(id=au.p_author_id).values('author__date_joined', 'author__
 Comment.objects.filter(id=au.id).values('time_in', 'user', 'c_rating', 'comment')
 
 
+admin
+superskillfact
+
+
+
+
 
