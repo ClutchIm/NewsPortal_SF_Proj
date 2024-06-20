@@ -1,6 +1,12 @@
 from django import template
+from news.resources import censor_list
+
 
 register = template.Library()
+
+
+class CharFieldException(Exception):
+    pass
 
 
 @register.filter()
@@ -16,3 +22,9 @@ def description_time_in(value):
         genre = 'новости'
     return f'Дата публикации {genre}: {value.time_in.strftime('%d %b %Y')}'
 
+
+@register.filter()
+def censor(value):
+    for word in censor_list:
+        value = value.replace(word[1:], '*' * len(word[1:]))
+    return value

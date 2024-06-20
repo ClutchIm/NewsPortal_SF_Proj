@@ -1,6 +1,5 @@
 from django.views.generic import ListView, DetailView
 from .models import Post
-from datetime import datetime
 
 
 class PostList(ListView):

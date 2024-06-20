@@ -85,6 +85,6 @@ admin
 superskillfact
 
 
-
+Post.objects.create(title=t_censor, main_text=censor, genre='AR')
 
 

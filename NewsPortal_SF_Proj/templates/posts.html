@@ -16,11 +16,11 @@ Posts
         <table>
             {% for p in post %}
             <tr>
-                <td>{{ p.title }}</td>
+                <td>{{ p.title|censor }}</td>
                 <td>{{ p.time_in|date:'M d Y' }}</td>
             </tr>
             <tr>
-                <td>{{ p.preview }}</td>
+                <td>{{ p.preview|censor }}</td>
             </tr>
             {% endfor %}`
         </table>
