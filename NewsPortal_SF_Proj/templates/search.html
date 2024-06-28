@@ -12,7 +12,14 @@ Posts Search
 {% block content %}
     <h1>Все новости</h1>
     <h3>{{ post|length }}</h3>
+
     <hr>
+    {% if perms.news.add_post %}
+    <a href="{% url 'news_create' %}">Добавить новость</a>
+    <a> / </a>
+    <a href="{% url 'articles_create' %}">Добавить статью</a>
+    {% endif %}
+
     <form action="" method="get" >
     {{ filterset.form.non_field_errors }}
 
@@ -21,7 +28,6 @@ Posts Search
     <input
         id="{{ filterset.form.title__icontains.id }}"
         name="{{ filterset.form.title__icontains.name }}"
-        value="{{ filterset.form.title__icontains.value }}"
         class="form-control"
     >
     <label for="">Категории: </label>
@@ -41,11 +47,36 @@ Posts Search
         <table>
             {% for p in post %}
             <tr>
-                <td>{{ p.title|censor }}</td>
+                <td><a href="{% url 'post_detail' pk=p.id %}">{{ p.title|censor }}</a></td>
                 <td>{{ p.time_in|date:'M d Y' }}</td>
+
+                {% if p.genre == 'AR' %}
+                <td>
+                    {% if perms.news.change_post %}
+                    <a> / </a>
+                    <a href="{% url 'articles_edit' pk=p.id %}">Изменить</a>
+                    {% endif %}
+                    {% if perms.news.delete_post %}
+                    <a> / </a>
+                    <a href="{% url 'articles_delete' p.id %}">Удалить</a>
+                    {% endif %}
+                </td>
+
+                {% else %}
+                <td>
+                    {% if perms.news.change_post %}
+                    <a> / </a>
+                    <a href="{% url 'news_edit' pk=p.id %}">Изменить</a>
+                    {% endif %}
+                    {% if perms.news.delete_post %}
+                    <a> / </a>
+                    <a href="{% url 'news_delete' p.id %}">Удалить</a>
+                    {% endif %}
+                </td>
+                {% endif %}
             </tr>
             <tr>
-                <td>{{ p.preview|censor }}</td>
+                <td>{{ p.preview|censor }}<p></p></td>
             </tr>
             {% endfor %}`
         </table>

@@ -11,17 +11,55 @@ Posts
 {% block content %}
     <h1>Все новости</h1>
     <h3>{{ post|length }}</h3>
+
+    <a href="{% url 'posts_search' %}">Поиск</a>
+
+    {% if perms.news.add_post %}
+    <hr>
+    <a href="{% url 'news_create' %}">Добавить новость</a>
+    <a> / </a>
+    <a href="{% url 'articles_create' %}">Добавить статью</a>
+    {% endif %}
     <hr>
     {% if post %}
         <table>
             {% for p in post %}
+
             <tr>
-                <td>{{ p.title|censor }}</td>
+                <td><a href="{% url 'post_detail' pk=p.id %}">{{ p.title|censor }}</a></td>
                 <td>{{ p.time_in|date:'M d Y' }}</td>
+
+                {% if p.genre == 'AR' %}
+                <td>
+                    {% if perms.news.change_post %}
+                    <a> / </a>
+                    <a href="{% url 'articles_edit' pk=p.id %}">Изменить</a>
+                    {% endif %}
+                    {% if perms.news.delete_post %}
+                    <a> / </a>
+                    <a href="{% url 'articles_delete' p.id %}">Удалить</a>
+                    {% endif %}
+                </td>
+
+                {% else %}
+                <td>
+                    {% if perms.news.change_post %}
+                    <a> / </a>
+                    <a href="{% url 'news_edit' pk=p.id %}">Изменить</a>
+                    {% endif %}
+                    {% if perms.news.delete_post %}
+                    <a> / </a>
+                    <a href="{% url 'news_delete' p.id %}">Удалить</a>
+                    {% endif %}
+                </td>
+                {% endif %}
+
             </tr>
+
             <tr>
-                <td>{{ p.preview|censor }}</td>
+                <td>{{ p.preview|censor }}<p></p></td>
             </tr>
+
             {% endfor %}`
         </table>
         <hr>
