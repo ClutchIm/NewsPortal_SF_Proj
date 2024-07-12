@@ -9,6 +9,7 @@ from django.urls import reverse_lazy
 from .models import Post, Subscription, Category
 from .filter import PostFilter
 from .forms import PostForm
+from .tasks import notify_about_new_post
 
 
 class PostList(ListView):
@@ -56,6 +57,8 @@ class NewsCreate(PermissionRequiredMixin, CreateView):
     def form_valid(self, form):
         post = form.save(commit=False)
         post.genre = 'NE'
+        post.save()
+        notify_about_new_post.delay(post.id)
         return super().form_valid(form)
 
 
@@ -82,6 +85,8 @@ class ArticlesCreate(PermissionRequiredMixin, CreateView):
     def form_valid(self, form):
         post = form.save(commit=False)
         post.genre = 'AR'
+        post.save()
+        notify_about_new_post.delay(post.id)
         return super().form_valid(form)
 
 
