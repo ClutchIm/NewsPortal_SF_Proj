@@ -19,10 +19,16 @@ class FlatPageAdmin(FlatPageAdmin):
     )
 
 
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('title', 'time_in', 'genre', 'p_author', 'preview', 'p_rating')
+    list_filter = ('time_in', 'category__category', 'p_rating')
+    search_fields = ('title', 'category__category')
+
+
 # Register your models here.
 admin.site.register(Author)
 admin.site.register(Category)
-admin.site.register(Post)
+admin.site.register(Post, PostAdmin)
 admin.site.register(Comment)
 admin.site.register(PostCategory)
 # Re-register FlatPageAdmin
