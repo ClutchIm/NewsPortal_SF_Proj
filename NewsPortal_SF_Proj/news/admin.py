@@ -20,9 +20,13 @@ class FlatPageAdmin(FlatPageAdmin):
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'time_in', 'genre', 'p_author', 'preview', 'p_rating')
-    list_filter = ('time_in', 'category__category', 'p_rating')
+    model = Post
+    list_display = ('id', 'title', 'time_in', 'categories', 'genre', 'p_author', 'preview', 'p_rating')
+    list_filter = ('time_in', 'category__category', 'p_author')
     search_fields = ('title', 'category__category')
+
+    def categories(self, obj: Post) -> str:
+        return ', '.join([category.category for category in obj.category.all()])
 
 
 # Register your models here.
