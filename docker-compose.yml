@@ -1,3 +1,5 @@
+name: news-portal
+
 services:
   news-app:
     container_name: news-portal
@@ -7,5 +9,35 @@ services:
       - "8000:8000"
     volumes:
       - ./NewsPortal_SF_Proj:/NewsPortal_SF_Proj
+    environment:
+      DB_HOST: news-db
+      DB_NAME: dbnews
+      DB_USER: dbnewsuser
+      DB_PASS: dbnewspass
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - news-db
+
+  news-db:
+    container_name: news-database
+    image: postgres:14.6-alpine
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: dbnews
+      POSTGRES_USER: dbnewsuser
+      POSTGRES_PASSWORD: dbnewspass
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+
+  pg-admin:
+    container_name: news-pgadmin
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: sorryclutcher@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: dbnewspass
+    ports:
+      - "5050:80"
