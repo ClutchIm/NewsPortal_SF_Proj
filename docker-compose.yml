@@ -1,0 +1,11 @@
+services:
+  news-app:
+    container_name: news-portal
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./NewsPortal_SF_Proj:/NewsPortal_SF_Proj
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
