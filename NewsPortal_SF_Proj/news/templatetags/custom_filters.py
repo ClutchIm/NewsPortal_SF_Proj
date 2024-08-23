@@ -28,3 +28,16 @@ def censor(value):
     for word in censor_list:
         value = value.replace(word[1:], '*' * len(word[1:]))
     return value
+
+
+@register.filter()
+def censoring(value):
+    value = value.split(' ')
+    result = ''
+
+    for word in value:
+        if len(word) > 2:
+            word = word.replace(word[1:-1], '*' * len(word[1:-1]))
+        result += word + ' '
+    return result
+

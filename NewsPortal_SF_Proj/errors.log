@@ -1,0 +1,2 @@
+2024-08-23 15:04:51,060 ERROR "GET / HTTP/1.1" 500 59 /Users/clutcher/dev/postgres_python_docker/.venv/lib/python3.12/site-packages/django/core/servers/basehttp.py None
+2024-08-23 15:04:56,910 ERROR "GET /news/ HTTP/1.1" 500 59 /Users/clutcher/dev/postgres_python_docker/.venv/lib/python3.12/site-packages/django/core/servers/basehttp.py None
