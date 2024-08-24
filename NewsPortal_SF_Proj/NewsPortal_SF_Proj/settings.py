@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-m@toxn_ex4=7ub$zt5gq$==aqqh89gjx0b_$a58&j0f%2o!6u*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Application definition
 
@@ -259,6 +259,7 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['console_error', 'console_warning', 'console_debug', 'general'],
+            'level': 'DEBUG',
             'propagate': True,
         },
         'django.request': {
