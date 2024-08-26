@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
 from django.utils.translation import gettext_lazy as _
+from modeltranslation.admin import TranslationAdmin
 from .models import Author, Category, Post, Comment, PostCategory
 
 
@@ -27,6 +28,14 @@ class PostAdmin(admin.ModelAdmin):
 
     def categories(self, obj: Post) -> str:
         return ', '.join([category.category for category in obj.category.all()])
+
+
+class CategoryTransAdmin(TranslationAdmin):
+    model = Category
+
+
+class PostTransAdmin(TranslationAdmin):
+    model = Post
 
 
 # Register your models here.

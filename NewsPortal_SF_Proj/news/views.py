@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -6,7 +7,6 @@ from django.db.models import Exists, OuterRef
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.core.cache import cache
-from django.utils.translation import gettext_lazy as _
 
 from .models import Post, Subscription, Category
 from .filter import PostFilter
@@ -25,6 +25,15 @@ class PostList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+    def get(self, request):
+        post = Post.objects.all()
+
+        context = {
+            'post': post,
+        }
+
+        return HttpResponse(render(request, 'posts.html', context))
 
 
 class PostDetail(DetailView):
