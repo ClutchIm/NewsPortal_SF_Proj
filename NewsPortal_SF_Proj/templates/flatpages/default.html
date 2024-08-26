@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
+    {% load tz %}
+    {% load i18n %}
+
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>{% block title %} {{ flatpage.content }} {% endblock title %}</title>
+        <style>
+        body {background-color: {% if current_time.hour >= 18 or current_time.hour <= 7 %} darkcyan {% else %} powderblue {% endif %};}
+    </style>
         <!-- Favicon-->
         {% load static %}
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
     </head>
-    <li>
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
             <div class="container">
@@ -28,7 +34,21 @@
                             <a class="nav-link" href="{% url 'posts_list' %}">Home
                             </a>
                         </li>
-                        {% load i18n %}
+                        <li class="navbar-nav ml-auto">
+                            {% get_current_timezone as TIME_ZONE %}
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                <label for="timezone">Time zone:</label>
+                                <select name="timezone">
+                                    {% for tz in timezones %}
+                                    <option value="{{ tz }}"{% if tz == TIME_ZONE %} selected{% endif %}>
+                                        {{ tz }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                                <input type="submit" value="{% trans 'ок' %}">
+                            </form>
+                        </li>
                         <li class="nav-item active">
                             <form action="{% url 'set_language' %}" method="POST"> {% csrf_token %}
                                 <input type="hidden" name="next" value="{{ redirect_to }}">
@@ -43,7 +63,7 @@
                                         </option>
                                     {% endfor %}
                                 </select>
-                                <input type="submit" value="OK">
+                                <input type="submit" value="{% trans 'ок' %}">
                             </form>
                         </li>
                     </ul>

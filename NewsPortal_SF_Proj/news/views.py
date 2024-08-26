@@ -1,10 +1,12 @@
+import pytz
 from django.http import HttpResponse
+from django.utils import timezone
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 from django.db.models import Exists, OuterRef
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.core.cache import cache
 
@@ -31,9 +33,15 @@ class PostList(ListView):
 
         context = {
             'post': post,
+            'current_time': timezone.localtime(timezone.now()),
+            'timezones': pytz.common_timezones
         }
 
         return HttpResponse(render(request, 'posts.html', context))
+
+    def post(self, request):
+        request.session['django_timezone'] = request.POST['timezone']
+        return redirect('/')
 
 
 class PostDetail(DetailView):

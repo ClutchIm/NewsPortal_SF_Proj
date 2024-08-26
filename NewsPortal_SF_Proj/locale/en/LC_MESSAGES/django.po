@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-26 11:58+0000\n"
+"POT-Creation-Date: 2024-08-26 14:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: news/admin.py:11
+#: news/admin.py:12
 msgid "Advanced options"
 msgstr ""
 
 #: news/templatetags/custom_filters.py:15
 msgid "Всего постов"
 msgstr "Total posts"
+
+#: news/templatetags/custom_filters.py:22
+msgid "статьи"
+msgstr "article"
+
+#: news/templatetags/custom_filters.py:24
+msgid "новости"
+msgstr "news"
+
+#: news/templatetags/custom_filters.py:25
+msgid "Дата публикации"
+msgstr "Date of publication of"
 
 #: templates/account/email/base_message.txt:1
 #, python-format
@@ -58,14 +70,10 @@ msgstr ""
 "Cheers!\n"
 
 #: templates/articles_delete.html:6 templates/articles_delete.html:10
-#, fuzzy
-#| msgid "Удалить"
 msgid "Удаление статьи"
 msgstr "Delete article"
 
 #: templates/articles_delete.html:14 templates/news_delete.html:14
-#, fuzzy
-#| msgid "Удалить"
 msgid "Удаляем"
 msgstr "Delete"
 
@@ -77,9 +85,11 @@ msgstr "Edit article"
 msgid "Внесите параметры"
 msgstr "Enter parameters"
 
+#: templates/flatpages/default.html:46
+msgid "ок"
+msgstr "set"
+
 #: templates/news_delete.html:6 templates/news_delete.html:10
-#, fuzzy
-#| msgid "Все новости"
 msgid "Удаление новости"
 msgstr "Delete news"
 
@@ -99,37 +109,43 @@ msgstr "Posts"
 msgid "Все новости"
 msgstr "All news"
 
-#: templates/posts.html:35 templates/search.html:28
+#: templates/posts.html:16 templates/search.html:28
 msgid "Поиск"
 msgstr "Search"
 
-#: templates/posts.html:39 templates/search.html:19
+#: templates/posts.html:20 templates/search.html:19
 msgid "Добавить новость"
 msgstr "Add news"
 
-#: templates/posts.html:41 templates/search.html:21
+#: templates/posts.html:22 templates/search.html:21
 msgid "Добавить статью"
 msgstr "Add article"
 
-#: templates/posts.html:56 templates/posts.html:68 templates/search.html:58
-#: templates/search.html:70
+#: templates/posts.html:37 templates/posts.html:49 templates/search.html:60
+#: templates/search.html:72
 msgid "Изменить"
 msgstr "Change"
 
-#: templates/posts.html:60 templates/posts.html:72 templates/search.html:62
-#: templates/search.html:74
+#: templates/posts.html:41 templates/posts.html:53 templates/search.html:64
+#: templates/search.html:76
 msgid "Удалить"
 msgstr "Delete"
 
 #: templates/search.html:9
-#, fuzzy
-#| msgid "Всего постов"
 msgid "Поиск постов"
 msgstr "Total posts"
+
+#: templates/search.html:34
+msgid "Категории"
+msgstr "Category"
 
 #: templates/search.html:37
 msgid "Дата"
 msgstr "Date"
+
+#: templates/search.html:46
+msgid "Найти"
+msgstr "Search"
 
 #: templates/subscriptions.html:6
 msgid "Подписки"

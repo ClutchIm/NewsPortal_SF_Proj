@@ -19,10 +19,11 @@ def length(value):
 @register.filter()
 def description_time_in(value):
     if value.genre == 'AR':
-        genre = 'статьи'
+        genre = _('статьи')
     else:
-        genre = 'новости'
-    return f'Дата публикации {genre}: {value.time_in.strftime('%d %b %Y')}'
+        genre = _('новости')
+    text = _("Дата публикации")
+    return f'{text} {genre}: {value.time_in.strftime('%d %b %Y')}'
 
 
 @register.filter()
@@ -42,10 +43,3 @@ def censoring(value):
             word = word.replace(word[1:-1], '*' * len(word[1:-1]))
         result += word + ' '
     return result
-
-@register.filter()
-def trans(value):
-    return _(value)
-
-
-
