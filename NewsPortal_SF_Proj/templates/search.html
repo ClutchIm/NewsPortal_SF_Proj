@@ -2,29 +2,30 @@
 
 {% load custom_filters %}
 {% load custom_tags %}
+{% load i18n %}
 
 
 {% block title %}
-Posts Search
+{% trans "Поиск постов" %}
 {% endblock title %}
 
 
 {% block content %}
-    <h1>Все новости</h1>
+    <h1>{% trans "Все новости" %}</h1>
     <h3>{{ post|length }}</h3>
 
     <hr>
     {% if perms.news.add_post %}
-    <a href="{% url 'news_create' %}">Добавить новость</a>
+    <a href="{% url 'news_create' %}">{% trans "Добавить новость" %}</a>
     <a> / </a>
-    <a href="{% url 'articles_create' %}">Добавить статью</a>
+    <a href="{% url 'articles_create' %}">{% trans "Добавить статью" %}</a>
     {% endif %}
 
     <form action="" method="get" >
     {{ filterset.form.non_field_errors }}
 
     {{ filterset.form.title__icontains.errors }}
-    <label for="{{ filterset.form.title__icontains.id_for_label }}">Поиск</label>
+    <label for="{{ filterset.form.title__icontains.id_for_label }}">{% trans "Поиск" %}</label>
     <input
         id="{{ filterset.form.title__icontains.id }}"
         name="{{ filterset.form.title__icontains.name }}"
@@ -33,7 +34,7 @@ Posts Search
     <label for="">Категории: </label>
     {{ filterset.form.category }}
     <p></p>
-    <label for="filterset.form.time_in__gt.id_for_label">Дата: </label>
+    <label for="filterset.form.time_in__gt.id_for_label">{% trans "Дата" %}: </label>
     <input
         type="datetime-local"
         id="{{ filterset.form.time_in__gt.id }}"
@@ -54,11 +55,11 @@ Posts Search
                 <td>
                     {% if perms.news.change_post %}
                     <a> / </a>
-                    <a href="{% url 'articles_edit' pk=p.id %}">Изменить</a>
+                    <a href="{% url 'articles_edit' pk=p.id %}">{% trans "Изменить" %}</a>
                     {% endif %}
                     {% if perms.news.delete_post %}
                     <a> / </a>
-                    <a href="{% url 'articles_delete' p.id %}">Удалить</a>
+                    <a href="{% url 'articles_delete' p.id %}">{% trans "Удалить" %}</a>
                     {% endif %}
                 </td>
 
@@ -66,11 +67,11 @@ Posts Search
                 <td>
                     {% if perms.news.change_post %}
                     <a> / </a>
-                    <a href="{% url 'news_edit' pk=p.id %}">Изменить</a>
+                    <a href="{% url 'news_edit' pk=p.id %}">{% trans "Изменить" %}</a>
                     {% endif %}
                     {% if perms.news.delete_post %}
                     <a> / </a>
-                    <a href="{% url 'news_delete' p.id %}">Удалить</a>
+                    <a href="{% url 'news_delete' p.id %}">{% trans "Удалить" %}</a>
                     {% endif %}
                 </td>
                 {% endif %}

@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 # from django.views.decorators.cache import cache_page
 
 from .views import (
@@ -18,4 +18,5 @@ urlpatterns = [
     path('articles/<int:pk>/edit/', ArticlesEdit.as_view(), name='articles_edit'),
     path('articles/<int:pk>/delete/', ArticlesDelete.as_view(), name='articles_delete'),
     path('subscriptions/', subscriptions, name='subscriptions'),
+    path('i18n/', include('django.conf.urls.i18n')),
 ]

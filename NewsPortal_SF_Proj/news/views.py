@@ -6,11 +6,13 @@ from django.db.models import Exists, OuterRef
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.core.cache import cache
+from django.utils.translation import gettext_lazy as _
 
 from .models import Post, Subscription, Category
 from .filter import PostFilter
 from .forms import PostForm
 from .tasks import notify_about_new_post
+
 
 
 class PostList(ListView):

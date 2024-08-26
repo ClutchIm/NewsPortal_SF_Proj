@@ -1,0 +1,144 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-26 11:58+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: news/admin.py:11
+msgid "Advanced options"
+msgstr ""
+
+#: news/templatetags/custom_filters.py:15
+msgid "Всего постов"
+msgstr "Total posts"
+
+#: templates/account/email/base_message.txt:1
+#, python-format
+msgid "Привет от %(site_name)s!"
+msgstr "Hello from %(site_name)s!"
+
+#: templates/account/email/base_message.txt:5
+#, python-format
+msgid ""
+"Спасибо за та что используете %(site_name)s!\n"
+"%(site_domain)s"
+msgstr ""
+"Thank you fo using %(site_name)s!\n"
+"%(site_domain)s"
+
+#: templates/account/email/email_confirmation_message.txt:5
+#, python-format
+msgid ""
+"Вы получили это сообщение, потому что пользователь %(user_display)s указал "
+"этот email при регистрации на сайте %(site_domain)s.\n"
+"\n"
+"Для подтверждения регистрации пройдите по ссылке %(activate_url)s\n"
+"\n"
+"Хорошего дня!\n"
+msgstr ""
+"You are see this massage because %(user_display)s use this email for "
+"registration on site %(site_domain)s.\n"
+"\n"
+"For confirm use %(activate_url)s\n"
+"\n"
+"Cheers!\n"
+
+#: templates/articles_delete.html:6 templates/articles_delete.html:10
+#, fuzzy
+#| msgid "Удалить"
+msgid "Удаление статьи"
+msgstr "Delete article"
+
+#: templates/articles_delete.html:14 templates/news_delete.html:14
+#, fuzzy
+#| msgid "Удалить"
+msgid "Удаляем"
+msgstr "Delete"
+
+#: templates/articles_edit.html:6
+msgid "Редактирование статьи"
+msgstr "Edit article"
+
+#: templates/articles_edit.html:10 templates/news_edit.html:10
+msgid "Внесите параметры"
+msgstr "Enter parameters"
+
+#: templates/news_delete.html:6 templates/news_delete.html:10
+#, fuzzy
+#| msgid "Все новости"
+msgid "Удаление новости"
+msgstr "Delete news"
+
+#: templates/news_edit.html:6
+msgid "Редактирование новости"
+msgstr "Edit news"
+
+#: templates/post.html:7
+msgid "Пост"
+msgstr "Post"
+
+#: templates/posts.html:8
+msgid "Посты"
+msgstr "Posts"
+
+#: templates/posts.html:13 templates/search.html:14
+msgid "Все новости"
+msgstr "All news"
+
+#: templates/posts.html:35 templates/search.html:28
+msgid "Поиск"
+msgstr "Search"
+
+#: templates/posts.html:39 templates/search.html:19
+msgid "Добавить новость"
+msgstr "Add news"
+
+#: templates/posts.html:41 templates/search.html:21
+msgid "Добавить статью"
+msgstr "Add article"
+
+#: templates/posts.html:56 templates/posts.html:68 templates/search.html:58
+#: templates/search.html:70
+msgid "Изменить"
+msgstr "Change"
+
+#: templates/posts.html:60 templates/posts.html:72 templates/search.html:62
+#: templates/search.html:74
+msgid "Удалить"
+msgstr "Delete"
+
+#: templates/search.html:9
+#, fuzzy
+#| msgid "Всего постов"
+msgid "Поиск постов"
+msgstr "Total posts"
+
+#: templates/search.html:37
+msgid "Дата"
+msgstr "Date"
+
+#: templates/subscriptions.html:6
+msgid "Подписки"
+msgstr "Subscriptions"
+
+#: templates/subscriptions.html:18 templates/subscriptions.html:21
+msgid "Подписаться"
+msgstr "Subscribe"
+
+#: templates/subscriptions.html:19 templates/subscriptions.html:22
+msgid "Отписаться"
+msgstr "Unsubscribe"

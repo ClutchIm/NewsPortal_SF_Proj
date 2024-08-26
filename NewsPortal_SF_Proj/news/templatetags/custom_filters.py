@@ -1,5 +1,6 @@
 from django import template
 from news.resources import censor_list
+from django.utils.translation import gettext as _
 
 
 register = template.Library()
@@ -11,7 +12,8 @@ class CharFieldException(Exception):
 
 @register.filter()
 def length(value):
-    return f'Всего постов: {len(value)}'
+    string = _('Всего постов')
+    return f'{string}: {len(value)}'
 
 
 @register.filter()
@@ -40,4 +42,10 @@ def censoring(value):
             word = word.replace(word[1:-1], '*' * len(word[1:-1]))
         result += word + ' '
     return result
+
+@register.filter()
+def trans(value):
+    return _(value)
+
+
 

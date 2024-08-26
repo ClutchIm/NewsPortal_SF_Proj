@@ -1,11 +1,13 @@
 {% extends 'flatpages/default.html' %}
 
+{% load i18n %}
+
 {% block title %}
-News Edit
+{% trans "Редактирование новости" %}
 {% endblock title %}
 
 {% block content %}
-<h1>Внесите параметры</h1>
+<h1>{% trans "Внесите параметры" %}</h1>
 <hr>
 <form action="" method="post">
     {% csrf_token %}
