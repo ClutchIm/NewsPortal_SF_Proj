@@ -26,22 +26,14 @@ class PostList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['current_time'] = timezone.localtime(timezone.now())
+        context['timezones'] = pytz.common_timezones
+
         return context
-
-    def get(self, request):
-        post = Post.objects.all()
-
-        context = {
-            'post': post,
-            'current_time': timezone.localtime(timezone.now()),
-            'timezones': pytz.common_timezones
-        }
-
-        return HttpResponse(render(request, 'posts.html', context))
 
     def post(self, request):
         request.session['django_timezone'] = request.POST['timezone']
-        return redirect('/')
+        return redirect(self.request.META['HTTP_REFERER'])
 
 
 class PostDetail(DetailView):

@@ -49,6 +49,11 @@
                                 <input type="submit" value="{% trans 'ок' %}">
                             </form>
                         </li>
+                        <li>
+                            <span style="color: white">
+                                {{ current_time|timezone:TIME_ZONE }}
+                            </span>
+                        </li>
                         <li class="nav-item active">
                             <form action="{% url 'set_language' %}" method="POST"> {% csrf_token %}
                                 <input type="hidden" name="next" value="{{ redirect_to }}">
