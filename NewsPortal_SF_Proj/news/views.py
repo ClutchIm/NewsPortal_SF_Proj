@@ -1,5 +1,4 @@
 import pytz
-from django.http import HttpResponse
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView
 from django.contrib.auth.mixins import PermissionRequiredMixin
@@ -49,6 +48,17 @@ class PostDetail(DetailView):
             cache.set(f'post-{self.kwargs["pk"]}', obj)
         return obj
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['current_time'] = timezone.localtime(timezone.now())
+        context['timezones'] = pytz.common_timezones
+
+        return context
+
+    def post(self, request, pk):
+        request.session['django_timezone'] = request.POST['timezone']
+        return redirect(self.request.META['HTTP_REFERER'])
+
 
 class PostSearch(ListView):
     model = Post
@@ -65,7 +75,13 @@ class PostSearch(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filterset'] = self.filterset
+        context['current_time'] = timezone.localtime(timezone.now())
+        context['timezones'] = pytz.common_timezones
         return context
+
+    def post(self, request):
+        request.session['django_timezone'] = request.POST['timezone']
+        return redirect(self.request.META['HTTP_REFERER'])
 
 
 class NewsCreate(PermissionRequiredMixin, CreateView):
@@ -81,6 +97,17 @@ class NewsCreate(PermissionRequiredMixin, CreateView):
         notify_about_new_post.delay(post.id)
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['current_time'] = timezone.localtime(timezone.now())
+        context['timezones'] = pytz.common_timezones
+
+        return context
+
+    def post(self, request):
+        request.session['django_timezone'] = request.POST['timezone']
+        return redirect(self.request.META['HTTP_REFERER'])
+
 
 class NewsEdit(PermissionRequiredMixin, UpdateView):
     permission_required = ('news.change_post',)
@@ -88,12 +115,34 @@ class NewsEdit(PermissionRequiredMixin, UpdateView):
     model = Post
     template_name = 'news_edit.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['current_time'] = timezone.localtime(timezone.now())
+        context['timezones'] = pytz.common_timezones
+
+        return context
+
+    def post(self, request, pk):
+        request.session['django_timezone'] = request.POST['timezone']
+        return redirect(self.request.META['HTTP_REFERER'])
+
 
 class NewsDelete(PermissionRequiredMixin, DeleteView):
     permission_required = ('news.delete_post',)
     model = Post
     template_name = 'news_delete.html'
     success_url = reverse_lazy('posts_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['current_time'] = timezone.localtime(timezone.now())
+        context['timezones'] = pytz.common_timezones
+
+        return context
+
+    def post(self, request, pk):
+        request.session['django_timezone'] = request.POST['timezone']
+        return redirect(self.request.META['HTTP_REFERER'])
 
 
 class ArticlesCreate(PermissionRequiredMixin, CreateView):
@@ -109,6 +158,17 @@ class ArticlesCreate(PermissionRequiredMixin, CreateView):
         notify_about_new_post.delay(post.id)
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['current_time'] = timezone.localtime(timezone.now())
+        context['timezones'] = pytz.common_timezones
+
+        return context
+
+    def post(self, request):
+        request.session['django_timezone'] = request.POST['timezone']
+        return redirect(self.request.META['HTTP_REFERER'])
+
 
 class ArticlesEdit(PermissionRequiredMixin, UpdateView):
     permission_required = ('news.change_post',)
@@ -116,12 +176,34 @@ class ArticlesEdit(PermissionRequiredMixin, UpdateView):
     model = Post
     template_name = 'articles_edit.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['current_time'] = timezone.localtime(timezone.now())
+        context['timezones'] = pytz.common_timezones
+
+        return context
+
+    def post(self, request, pk):
+        request.session['django_timezone'] = request.POST['timezone']
+        return redirect(self.request.META['HTTP_REFERER'])
+
 
 class ArticlesDelete(PermissionRequiredMixin, DeleteView):
     permission_required = ('news.delete_post',)
     model = Post
     template_name = 'articles_delete.html'
     success_url = reverse_lazy('posts_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['current_time'] = timezone.localtime(timezone.now())
+        context['timezones'] = pytz.common_timezones
+
+        return context
+
+    def post(self, request, pk):
+        request.session['django_timezone'] = request.POST['timezone']
+        return redirect(self.request.META['HTTP_REFERER'])
 
 
 @login_required

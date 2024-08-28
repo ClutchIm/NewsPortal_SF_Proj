@@ -10,14 +10,15 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>{% block title %} {{ flatpage.content }} {% endblock title %}</title>
-        <style>
-        body {background-color: {% if current_time.hour >= 18 or current_time.hour <= 7 %} darkcyan {% else %} powderblue {% endif %};}
-    </style>
         <!-- Favicon-->
         {% load static %}
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
     </head>
+        <style>
+            body {background-color:
+            {% if current_time.hour >= 19 or current_time.hour <= 7 %} powderblue {% else %} white {% endif %};}
+        </style>
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
             <div class="container">
