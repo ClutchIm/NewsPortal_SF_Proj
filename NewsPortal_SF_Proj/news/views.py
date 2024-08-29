@@ -1,19 +1,18 @@
 import pytz
-from django.utils import timezone
-from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView
-from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.db.models import Exists, OuterRef
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.core.cache import cache
+from django.utils import timezone
+from django.views.decorators.csrf import csrf_protect
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView
+from rest_framework import viewsets
 
-from .models import Post, Subscription, Category
 from .filter import PostFilter
 from .forms import PostForm
+from .serializers import *
 from .tasks import notify_about_new_post
-
 
 
 class PostList(ListView):
@@ -235,4 +234,35 @@ def subscriptions(request):
         'subscriptions.html',
         {'categories': categories_with_subscriptions},
     )
+
+
+class AuthorViewSet(viewsets.ModelViewSet):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
+
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+
+class PostCategoryViewSet(viewsets.ModelViewSet):
+    queryset = PostCategory.objects.all()
+    serializer_class = PostCategorySerializer
+
+
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+
+class SubscriptionViewSet(viewsets.ModelViewSet):
+    queryset = Subscription.objects.all()
+    serializer_class = SubscriptionSerializer
+
 

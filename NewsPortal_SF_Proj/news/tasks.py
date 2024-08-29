@@ -6,7 +6,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils import timezone
 
-from NewsPortal_SF_Proj import settings
+from NewsPortal import settings
 from .models import Post, Subscription
 
 

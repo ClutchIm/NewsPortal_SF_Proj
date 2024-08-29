@@ -3,7 +3,7 @@
 # from django.db.models.signals import m2m_changed
 # from django.dispatch import receiver
 #
-# from NewsPortal_SF_Proj import settings
+# from NewsPortal import settings
 # from .models import PostCategory, Subscription
 #
 #

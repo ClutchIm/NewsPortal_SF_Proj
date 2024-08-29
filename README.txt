@@ -13,3 +13,5 @@
     --U "celery[redis]"
     -psycopg-binary
     -django-modeltranslation
+    -djangorestframework
+    -markdown
