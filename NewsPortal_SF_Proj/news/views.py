@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from .filter import PostFilter
 from .forms import PostForm
@@ -236,33 +237,14 @@ def subscriptions(request):
     )
 
 
-class AuthorViewSet(viewsets.ModelViewSet):
-    queryset = Author.objects.all()
-    serializer_class = AuthorSerializer
-
-
-class CategoryViewSet(viewsets.ModelViewSet):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
-
-
-class PostViewSet(viewsets.ModelViewSet):
-    queryset = Post.objects.all()
+class ArticlesViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.filter(genre="AR")
     serializer_class = PostSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-class PostCategoryViewSet(viewsets.ModelViewSet):
-    queryset = PostCategory.objects.all()
-    serializer_class = PostCategorySerializer
-
-
-class CommentViewSet(viewsets.ModelViewSet):
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
-
-
-class SubscriptionViewSet(viewsets.ModelViewSet):
-    queryset = Subscription.objects.all()
-    serializer_class = SubscriptionSerializer
-
+class NewsViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.filter(genre="NE")
+    serializer_class = PostSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 

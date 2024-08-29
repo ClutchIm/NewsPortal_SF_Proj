@@ -21,12 +21,8 @@ from rest_framework import routers
 from news import views
 
 router = routers.DefaultRouter()
-router.register(r'author', views.AuthorViewSet)
-router.register(r'post', views.PostViewSet)
-router.register(r'comment', views.CommentViewSet)
-router.register(r'postcategory', views.PostCategoryViewSet)
-router.register(r'category', views.CategoryViewSet)
-router.register(r'subscription', views.SubscriptionViewSet)
+router.register(r'articles', views.ArticlesViewSet, basename='articles')
+router.register(r'news', views.NewsViewSet, basename='news')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
